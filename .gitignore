@@ -1,0 +1,19 @@
+# Archivos a ignorar en el control de versiones
+
+# archivos de Eclipse
+.classpath
+.project
+.metadata
+.settings/
+*.tmp
+*.bak
+*.swp
+bin/
+tmp/
+
+# maven
+target/
+
+# BD de derby
+biblioteca_Db/
+derby.log
