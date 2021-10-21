@@ -1,33 +1,31 @@
-package biblioteca.accesoDatos.utils;
+package utils.accesoDatos;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 /**
- * This implementation uses JPA Criteria API.
- * @author Jaime Chavarriaga
+ * Implementación de GenericDAO basada en el JPA Criteria API.
  *
- * @param <T>
- * @param <ID>
+ * @param <T>	Clase Entidad 
+ * @param <ID>	Clase del identificador de la entidad
  */
 public class GenericJpaDAO<T, ID extends Serializable> implements
 		GenericDAO<T, ID> {
 
+	@Inject private EntityManager em;
+	
 	private Class<T> persistentClass;
 
 	private String persistentClassName = null;
 	
-	@PersistenceContext
-	private EntityManager em;
-
 	
 	// == constructores
 	
@@ -41,6 +39,8 @@ public class GenericJpaDAO<T, ID extends Serializable> implements
 		this();
 		this.em = em;
 	}
+
+	// == métodos para determinar la clase Entidad del DAO
 	
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
@@ -60,7 +60,7 @@ public class GenericJpaDAO<T, ID extends Serializable> implements
 	}
 	
 
-	// == simple queries
+	// == Consultas básicas
 
 	public T findById(ID id) {
 		return findById( id, false );
@@ -79,12 +79,7 @@ public class GenericJpaDAO<T, ID extends Serializable> implements
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> findAll() {
-		
-		// in Hibernate you can use complete name
-		//    getPersistentClass().getName()
-		// in EclipseLink it is not possible
-		
+	public List<T> findAll() {	
 		Query query = em.createQuery("select x from " 
 				+ getPersistentClassName()
 				+ " x ");
@@ -119,23 +114,25 @@ public class GenericJpaDAO<T, ID extends Serializable> implements
 	// == Transacciones
 	
 	public void beginTransaction() {
-		// inicia una transacci�n
+		// inicia una transacción
 		em.getTransaction().begin();
 	}
 	
 	public void commit() {
-		// hace commit de la transacci�n
+		// hace commit de la transacción
 		em.getTransaction().commit();
 	}
 
 	public void rollback() {
 		try {
-			// hace rollback  de la transacci�n
+			// hace rollback  de la transacción
 			em.getTransaction().rollback();
 		} catch (Exception e) {
-			// no haga nada
+			// no haga nada ??
 		}
 	}	
+	
+	// == otras funciones
 	
 	public void flush() {
 		em.flush();
@@ -146,7 +143,7 @@ public class GenericJpaDAO<T, ID extends Serializable> implements
 	}
 
 	
-	// == queries support
+	// == soporte para ejecutar otras consultas
 	
 	@SuppressWarnings("unchecked")
 	protected T executeSingleResultNamedQuery(String namedQuery) {

@@ -1,14 +1,13 @@
 package biblioteca.accesoDatos;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-
-import biblioteca.accesoDatos.utils.GenericJpaDAO;
+import utils.accesoDatos.GenericJpaDAO;
 import biblioteca.modelo.Reglamento;
 
+@ApplicationScoped
 public class DaoReglamento extends GenericJpaDAO<Reglamento, String>{
 
-	// == constructores
-	
 	public DaoReglamento() { }
 	
 	public DaoReglamento(EntityManager em) {

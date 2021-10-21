@@ -1,0 +1,58 @@
+-- Pruebas para prestar libro
+
+1. Camino Féliz / Happy Path
+   --> datos:correo que si exista, que no tenga multa.. 
+   
+2. Prestar a un usuario que no exista
+   --> datos: un usuario que no exista
+   
+3. Prestar a un usuario que tiene multa
+4. Prestar a un usuario que tiene más de 5 libros
+5. Prestar un ejemplar que no existe
+6. Prestar un ejemplar que no esta disponible
+7. Prestar un ejemplar cuando el usurio tiene una 
+   copia del mismo libro
+   
+8. cuando la fecha de devolución es en domingo 
+   y festivo
+   
+  
+
+ -- Pruebas para devolver ejemplar
+ 
+1. Camino Feliz
+
+2. devolver un ejemplar que no existe
+3. devolver un ejemplar que esta disponible
+4. devolver después de la fecha de entrega (multa)
+
+
+
+-----
+
+tipos de usuario
+- estudiante
+- profesor
+
+categorias
+- general
+- reserva
+
+reglamento
+- estudiante, general, 5 días
+- estudiante, reserva, 1 día
+- profesor, general, 15 días
+- profesor, reserva, 5 días
+
+
+
+
+
+
+
+
+
+
+
+
+

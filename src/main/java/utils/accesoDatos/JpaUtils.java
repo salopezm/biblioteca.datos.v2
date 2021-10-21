@@ -1,41 +1,13 @@
-package biblioteca.accesoDatos.utils;
+package utils.accesoDatos;
 
 import java.util.List;
 import java.util.Map;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 public class JpaUtils {
-	
-	private static EntityManagerFactory factory;
-	
-	public static EntityManager getEntityManager(String unitName) {
 		
-		// captura los errores al conectarse a la base de datos 
-		try {
-			// inicia la conexión
-			factory = Persistence.createEntityManagerFactory( unitName );
-			EntityManager em = factory.createEntityManager();
-			
-			return em;
-			
-		// no se pudo conectar ??
-		} catch (Exception e) {
-			// error al crear la conexión
-			System.out.println("Error creando conexión : " + e.getMessage());
-			e.printStackTrace();
-			
-			throw new RuntimeException("Error creando conexión : " + e.getMessage(), e);
-		}
-	}
-	
-	public static EntityManagerFactory getEntityManagerFactory() {
-		return factory;
-	}
-	
 	public static Object executeSingleResultNamedQuery(EntityManager em, String namedQuery) {
 		Query consulta = em.createNamedQuery(namedQuery);
 		Object resultado = consulta.getSingleResult();

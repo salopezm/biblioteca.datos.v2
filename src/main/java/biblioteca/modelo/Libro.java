@@ -35,6 +35,7 @@ public class Libro {
 	@OneToMany(mappedBy="libro",  cascade={CascadeType.ALL, CascadeType.REMOVE})
 	private List<Copia> copias;
 
+	
 	public Libro() {
 	}
 	

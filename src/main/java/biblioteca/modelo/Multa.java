@@ -26,8 +26,8 @@ public class Multa {
 	@JoinColumn(name="id_prestamo")
 	private Prestamo prestamo;
 	
+	
 	public Multa() {
-
 	}
 
 	public void setValor(double value) {

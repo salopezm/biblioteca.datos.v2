@@ -26,7 +26,7 @@ public class Usuario {
 	private String nombre;
 
 	private String direccion;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_usuario")
 	private TipoUsuario tipo;
@@ -34,8 +34,8 @@ public class Usuario {
 	@OneToMany(mappedBy="usuario")
 	private List<Prestamo> prestamos;
 
+	
 	public Usuario() {
-
 	}
 	
 	public void setCodigo(String value) {
@@ -88,5 +88,5 @@ public class Usuario {
 	public void setPrestamos(List<Prestamo> prestamos) {
 		this.prestamos = prestamos;
 	}
-	
+
 }

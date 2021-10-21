@@ -38,21 +38,122 @@
 		    <groupId>org.eclipse.persistence</groupId>
 		    <artifactId>eclipselink</artifactId>
 		    <version>3.0.2</version>
-		</dependency>		
+		</dependency>			
 		<dependency>
 		    <groupId>jakarta.persistence</groupId>
 		    <artifactId>jakarta.persistence-api</artifactId>
 		    <version>3.0.0</version>
 		</dependency>
 		
+		<!-- CDI -->
+		<dependency>
+		    <groupId>jakarta.enterprise</groupId>
+		    <artifactId>jakarta.enterprise.cdi-api</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss</groupId>
+		    <artifactId>jandex</artifactId>
+		    <version>2.0.3.Final</version>
+		</dependency>		
+		
 		<!-- pruebas de unidad -->
 		<dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.0.3</version>
+            <version>5.4.1</version>
             <scope>test</scope>
         </dependency>
-        
+
+		<!-- pruebas usando inyección de dependencias -->
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se-core</artifactId>
+			<version>4.0.0.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-junit5</artifactId>
+			<version>3.0.0.Final</version>
+			<scope>test</scope>
+		</dependency>
+  
 	</dependencies>
+
+	<!-- proceso de compilación -->
+	<build>
+		<plugins>
+			<!-- generación de sitio web con información -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
+			</plugin>
+			<!-- gestión de pruebas de unidad -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<includes>
+						<include>**/Prueba*.java</include>
+					</includes>
+				</configuration>				
+			</plugin>
+			<!-- cobertura de líneas de código -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<!-- primera ejecución : para preparar el agente JaCoCo runtime -->
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- segunda ejecución :para crear los reportes -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>				
+			</plugin>						
+		</plugins>	
+	</build>
+
+	<!-- generación de reportes -->
+    <reporting>
+        <plugins>
+		    <!-- reporte de junit:  ejecute `mvn clean test site` -->
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+			<!-- cobertura de pruebas -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+				  <reportSet>
+					<reports>
+					  <!-- select non-aggregate reports -->
+					  <report>report</report>
+					</reports>
+				  </reportSet>
+				</reportSets>
+			  </plugin>
+        </plugins>
+    </reporting>	
 
 </project>

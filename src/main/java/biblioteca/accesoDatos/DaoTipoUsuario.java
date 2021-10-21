@@ -1,14 +1,13 @@
 package biblioteca.accesoDatos;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-
-import biblioteca.accesoDatos.utils.GenericJpaDAO;
+import utils.accesoDatos.GenericJpaDAO;
 import biblioteca.modelo.TipoUsuario;
 
+@ApplicationScoped
 public class DaoTipoUsuario extends GenericJpaDAO<TipoUsuario, String>{
 
-	// == constructores
-	
 	public DaoTipoUsuario() { }
 	
 	public DaoTipoUsuario(EntityManager em) {

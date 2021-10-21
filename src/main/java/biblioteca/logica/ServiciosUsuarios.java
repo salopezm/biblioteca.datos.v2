@@ -1,39 +1,32 @@
 package biblioteca.logica;
 
-import jakarta.persistence.EntityManager;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import biblioteca.accesoDatos.DaoTipoUsuario;
 import biblioteca.accesoDatos.DaoUsuario;
-import biblioteca.accesoDatos.utils.JpaUtils;
 import biblioteca.modelo.TipoUsuario;
 import biblioteca.modelo.Usuario;
 
+@ApplicationScoped
 public class ServiciosUsuarios {
 
-	static EntityManager 	manager;
+	@Inject	DaoUsuario 		daoUsuario;
+	@Inject	DaoTipoUsuario 	daoTipoUsuario;
 	
-	static DaoUsuario 		daoUsuario;
-	static DaoTipoUsuario 	daoTipoUsuario;
+	public ServiciosUsuarios() { }
+
 	
-	private static void initDB() {		
-		if ( manager == null ) {
-			manager 		= JpaUtils.getEntityManager("biblioteca_PU");
-			daoUsuario 		= new DaoUsuario( manager );
-			daoTipoUsuario 	= new DaoTipoUsuario( manager );
-		}		
-	}
-	
-	// --
+	// == casos de uso
 	
 	// CU1 : Registrar Usuario	
-	public static void registarUsuario(
+	public void registarUsuario(
 			String codUsuario, String numDocumento,
 			String tipoUsuario, String nombre, String direccion
 			) 
 		throws Exception {
 	
-		initDB();		
-		
+	
 		// 3. Valida que no exista un usuario con ese código
 		Usuario usuario = daoUsuario.findById(codUsuario);
 		if ( usuario != null ) {

@@ -16,12 +16,12 @@ public class VerTodosLosUsuarios {
 
 		// == Cargar los datos de prueba
 		
-		DatosPrueba.borrarDatosPrueba();
-		DatosPrueba.crearDatosPrueba();
+		// DatosPrueba.borrarDatosPrueba();
+		// DatosPrueba.crearDatosPrueba();
 		
 		// == Conectar a la base de datos  		
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("persistenceUnit");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("biblioteca_PU");
 		EntityManager manager = factory.createEntityManager();
 		
 		// == Consultas de prueba

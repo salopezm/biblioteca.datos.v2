@@ -17,15 +17,17 @@
 			
 		<properties>
 		
+			<!-- Database connection -->
 			<property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-			<property name="jakarta.persistence.jdbc.url" value="jdbc:derby:biblioteca_Db;create=true" />
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:derby:biblioteca_Db;create=true;territory=es_CO;collation=TERRITORY_BASED" />
 			<property name="jakarta.persistence.jdbc.user" value="biblioteca" />
 			<property name="jakarta.persistence.jdbc.password" value="biblioteca" />
 
 			<!-- EclipseLink should create the database schema automatically -->
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
-			<property name="eclipselink.logging.level" value="SEVERE"/>				
+			<property name="eclipselink.logging.level" value="SEVERE"/>
+							
 		</properties>
 
 	</persistence-unit>

@@ -1,4 +1,4 @@
-package biblioteca.accesoDatos.utils;
+package utils.accesoDatos;
 
 import java.io.Serializable;
 import java.util.List;

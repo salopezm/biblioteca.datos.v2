@@ -36,7 +36,6 @@ public class Prestamo {
 	private Usuario usuario;
 	
 	public Prestamo() {
-	
 	}
 	
 	public void setId(long value) {

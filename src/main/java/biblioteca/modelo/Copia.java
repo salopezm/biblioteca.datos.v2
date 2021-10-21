@@ -31,6 +31,10 @@ public class Copia {
 	@OneToMany(mappedBy="copia", cascade={CascadeType.ALL, CascadeType.REMOVE})
 	private List<Prestamo> prestamos;
 
+	
+	public Copia() {
+	}
+	
 	public void setCodigoBarras(long value) {
 		this.codigoBarras = value;
 	}

@@ -1,14 +1,13 @@
 package biblioteca.accesoDatos;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
-
-import biblioteca.accesoDatos.utils.GenericJpaDAO;
+import utils.accesoDatos.GenericJpaDAO;
 import biblioteca.modelo.Copia;
 
-public class DaoCopia extends GenericJpaDAO<Copia, String>{
+@ApplicationScoped
+public class DaoCopia extends GenericJpaDAO<Copia, Long>{
 
-	// == constructores
-	
 	public DaoCopia() { }
 	
 	public DaoCopia(EntityManager em) {

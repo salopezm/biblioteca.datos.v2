@@ -25,6 +25,7 @@ public class Reglamento {
 	@JoinColumn(name = "id_tipo_usuario")
 	private TipoUsuario tipoUsuario;
 
+	
 	public Reglamento() {
 	}
 	

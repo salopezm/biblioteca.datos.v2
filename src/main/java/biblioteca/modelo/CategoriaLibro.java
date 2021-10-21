@@ -22,6 +22,7 @@ public class CategoriaLibro {
 	@OneToMany(mappedBy="categoriaLibro", cascade={CascadeType.ALL, CascadeType.REMOVE})
 	private List<Libro> libros;
 
+	
 	public CategoriaLibro() {
 	}
 

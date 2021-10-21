@@ -2,10 +2,10 @@ package biblioteca.modelo.pruebas;
 
 import java.util.Date;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 
 import biblioteca.modelo.CategoriaLibro;
 import biblioteca.modelo.Copia;
@@ -14,11 +14,16 @@ import biblioteca.modelo.Reglamento;
 import biblioteca.modelo.TipoUsuario;
 import biblioteca.modelo.Usuario;
 
+@ApplicationScoped
 public class HelperDatosPrueba {
 
-	public static void borrarDatosPrueba() {
+	@Inject EntityManager manager;
+	
+	// ---
+	
+	public void borrarDatosPrueba() {
 
-		initDB();
+		System.out.println("manager " + manager);
 		
 		EntityTransaction tx = manager.getTransaction();
 		
@@ -57,7 +62,7 @@ public class HelperDatosPrueba {
 		
 	}
 
-	public static void crearCategoriaLibro(String id, String nombre) {
+	public void crearCategoriaLibro(String id, String nombre) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -72,7 +77,7 @@ public class HelperDatosPrueba {
 		
 	}
 	
-	public static void crearLibro(long isbn, String titulo, String autor, String editor, Date fechaPublicacion, String idCategoria) {
+	public void crearLibro(long isbn, String titulo, String autor, String editor, Date fechaPublicacion, String idCategoria) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -95,7 +100,7 @@ public class HelperDatosPrueba {
 		
 	}
 	
-	public static void crearCopia( long isbnLibro, long codigoBarras, Date fechaAdquisicion, boolean disponible ) {
+	public void crearCopia( long isbnLibro, long codigoBarras, Date fechaAdquisicion, boolean disponible ) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -116,7 +121,7 @@ public class HelperDatosPrueba {
 
 	}
 	
-	public static void crearTipoUsuario( String id, String nombre ) {
+	public void crearTipoUsuario( String id, String nombre ) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -130,7 +135,7 @@ public class HelperDatosPrueba {
 		
 	}
 	
-	public static void crearUsuario( String codigo, String numDocumento, String nombre, String direccion, String idTipo ) {
+	public void crearUsuario( String codigo, String numDocumento, String nombre, String direccion, String idTipo ) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -152,7 +157,7 @@ public class HelperDatosPrueba {
 		
 	}
 
-	public static void crearReglamento( String idCategoria, String idTipoUsuario, int diasPrestamo, double MultaDiaria) {
+	public void crearReglamento( String idCategoria, String idTipoUsuario, int diasPrestamo, double MultaDiaria) {
 		
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -175,54 +180,6 @@ public class HelperDatosPrueba {
 		
 		tx.commit();
 		
-		
 	}
 
-	
-	// --
-
-	static EntityManager manager;
-	
-	public static void initDB() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("biblioteca_PU");
-		manager = factory.createEntityManager();
-	}
-	
-	public static void crearDatosPrueba() {
-
-		initDB();
-		
-		crearCategoriaLibro("general", "Colección General");
-		crearCategoriaLibro("reserva", "Colección Reserva");
-		
-		crearLibro(1L, "La Biblia", 		"", 			"", new Date(), "general");
-		crearLibro(2L, "Romeo y Julieta", 	"Shakespeare", 	"", new Date(), "general");
-		crearLibro(3L, "El Quijote", 		"Cervantes", 	"", new Date(), "general");
-		crearLibro(4L, "Algebra", 			"Baldor", 		"", new Date(), "reserva");
-		crearLibro(5L, "Fisica", 			"Serway", 		"", new Date(), "reserva");
-		
-		crearCopia( 1L,  101L, new Date(), true);	// la biblia
-		crearCopia( 1L,  102L, new Date(), true);
-		crearCopia( 2L,  201L, new Date(), true);	// romeo y julieta
-		crearCopia( 3L,  301L, new Date(), true);	// el quijote
-		crearCopia( 4L,  401L, new Date(), true);	// algebra
-		crearCopia( 4L,  402L, new Date(), true);
-		crearCopia( 5L,  501L, new Date(), true);	// fisica
-
-		crearTipoUsuario("profesor", 	"Profesores de la Universidad");
-		crearTipoUsuario("estudiante", 	"Estudiantes de la Universidad");
-		
-		crearUsuario("100-01", "101", "paola", 	"", "profesor");
-		crearUsuario("100-02", "102", "jaime", 	"", "profesor");
-		crearUsuario("200-01", "201", "jorgue",	"", "estudiante");
-		crearUsuario("200-02", "202", "juan", 	"", "estudiante");
-		
-		//				categoria, tipo-usr, dias prestamo, valor multa diaria
-		crearReglamento("general", "profesor",	 10, 100.0);
-		crearReglamento("reserva", "profesor", 	  5, 100.0);
-		crearReglamento("general", "estudiante", 10, 150.0);
-		crearReglamento("reserva", "estudiante",  5, 250.0);
-		
-	}	
-	
 }

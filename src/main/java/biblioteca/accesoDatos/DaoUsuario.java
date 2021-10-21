@@ -1,12 +1,15 @@
 package biblioteca.accesoDatos;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
+import utils.accesoDatos.GenericJpaDAO;
 
-import static biblioteca.accesoDatos.utils.FluentMap.Map;
-import static biblioteca.accesoDatos.utils.FluentMap.entry;
-import biblioteca.accesoDatos.utils.GenericJpaDAO;
+import static utils.accesoDatos.FluentMap.Map;
+import static utils.accesoDatos.FluentMap.entry;
+
 import biblioteca.modelo.Usuario;
 
+@ApplicationScoped
 public class DaoUsuario extends GenericJpaDAO<Usuario, String>{
 
 	// == constructores

@@ -21,8 +21,8 @@ public class TipoUsuario {
 	@OneToMany(mappedBy="tipoUsuario")
 	private List<Reglamento> reglamentos;
 
+	
 	public TipoUsuario() {
-
 	}
 
 	public void setId(String value) {
